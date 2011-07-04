@@ -1,0 +1,90 @@
+% This is the moreenum package
+% By Seamus Bradley 2011
+% tex@seamusbradley.net
+% Lisenced under LPPL v1.3c
+% http://www.latex-project.org/lppl.txt
+
+\ProvidesPackage{moreenum}[2011/07/04 v0.8]
+
+\RequirePackage{amsmath}
+\RequirePackage{alphalph}
+\RequirePackage{enumitem}
+\input{binhex}
+
+
+%------------------------------
+%     Lowercase Greek
+%------------------------------
+
+% Thanks to T.D.'s answer on tex.sx for the basic insight
+% into how to achieve this.
+% http://tex.stackexchange.com/questions/4058/greek-numbering/4063#4063
+
+\newcommand*{\single@greek}[1]{%
+  \expandafter\@single@greek\csname c@#1\endcsname
+}
+\newcommand*{\@single@greek}[1]{%
+  $\ifcase#1\or\alpha\or\beta\or\gamma\or\delta\or\varepsilon
+    \or\zeta\or\eta\or\theta\or\iota\or\kappa\or\lambda
+    \or\mu\or\nu\or\xi\or o\or\pi\or\varrho\or\sigma
+    \or\tau\or\upsilon\or\phi\or\chi\or\psi\or\omega
+    \else\@ctrerr\fi$
+}
+
+\newalphalph{\@greek}[alph]{\@single@greek}{24}
+\newcommand*{\greek}[1]{%
+  \expandafter\@greek\csname c@#1\endcsname
+}
+
+\AddEnumerateCounter{\greek}{\@greek}{$\omega$}
+
+%------------------------------
+%    Uppercase Greek
+%------------------------------
+
+\newcommand*{\Single@Greek}[1]{%
+  \expandafter\@Single@Greek\csname c@#1\endcsname
+}
+\newcommand*{\@Single@Greek}[1]{%
+  $\ifcase#1\or A \or B\or\Gamma\or\Delta\or E
+  \or Z\or E\or\Theta\or I\or K\or\Lambda
+  \or M\or N\or \Xi\or O\or\Pi\or P\or\Sigma
+  \or T\or Y\or\Phi\or X\or\Psi\or\Omega
+  \else\@ctrerr\fi$
+}
+
+\newalphalph{\@Greek}[alph]{\@Single@Greek}{24}
+\newcommand*{\Greek}[1]{%
+  \expandafter\@Greek\csname c@#1\endcsname
+}
+
+\AddEnumerateCounter{\Greek}{\@Greek}{$W$}
+
+
+%------------------------------
+%   Uppercase Hexadecimal
+%------------------------------
+
+% Thanks to egreg at tex.sx for telling me about binary.tex
+% http://tex.stackexchange.com/questions/22234/why-does-enumitem-need-the-macro-to-exist-already/22236#22236
+
+\newcommand*{\Hex}[1]{\expandafter\hex\csname c@#1\endcsname}
+\AddEnumerateCounter{\Hex}{\hex}{E}
+
+%------------------------------
+%   Lowercase Hexadecimal
+%------------------------------
+\newcommand*\lhex[1]{\MakeLowercase{\Hex{#1}}}
+\AddEnumerateCounter{\lhex}{\@lhex}{e}
+
+%------------------------------
+%         Binary
+%------------------------------
+
+\newcommand{\binenum}[1]{\expandafter\binary\csname c@#1\endcsname}
+\AddEnumerateCounter{\binenum}{\binary}{$0$}
+
+
+%------------------------------
+%  Here ends the file
+%------------------------------
