@@ -1,3 +1,15 @@
 This is the readme for moreenum.sty
 
-There is very little to say about this package.
+This provides the following new enumerate styles.
+
+ - \greek for lowercase Greek letters
+ - \Greek for uppercase Greek letters
+ - \Hex for uppercase hexadecimal enumeration
+ - \lhex for lowercase hexadecimal enumeration
+ - \binenum for binary enumeration
+ - \enumnth for "1st", "2nd", "3rd" etc
+ - \nthwords for "First", "Second", "Third" etc
+
+Each of these works with enumitem's "starred variant" feature.
+So \begin{enumerate}[label=\Hex*] will output a hex enumerated list.
+Enumitem provides a start=0 option for starting your enumerations at 0.
