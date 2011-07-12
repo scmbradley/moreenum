@@ -108,6 +108,22 @@
 }
 \AddEnumerateCounter{\nthwords}{\@nthwords}{Seventeenth}
 
+
+%------------------------------
+%        "n" words
+%------------------------------
+
+\newcommand{\nwords}[1]{\expandafter\@nwords\csname c@#1\endcsname}
+\newcommand{\@nwords}[1]{%
+  \ifcase#1\or One\or Two\or Three\or Four\or Five%
+  \or Six\or Seven\or Eight\or Nine\or Ten\or Eleven%
+  \or Twelve\or Thirteen\or Fourteen\or Fifteen%
+  \or Sixteen\or Seventeen\or Eighteen\or Nineteen%
+  \or Twenty%
+  \else\@ctrerr\fi
+}
+\AddEnumerateCounter{\nwords}{\@nwords}{Seventeen}
+
 %------------------------------
 %  Here ends the file
 %------------------------------

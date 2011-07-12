@@ -9,7 +9,11 @@ This provides the following new enumerate styles.
  - \binenum for binary enumeration
  - \enumnth for "1st", "2nd", "3rd" etc
  - \nthwords for "First", "Second", "Third" etc
+ - \nwords for "One", "Two", "Three" etc
 
 Each of these works with enumitem's "starred variant" feature.
 So \begin{enumerate}[label=\Hex*] will output a hex enumerated list.
 Enumitem provides a start=0 option for starting your enumerations at 0.
+
+Currently requires amsmath, alphalph, enumitem, binhex and nth,
+all of which should be part of any modern TeX distribution.
