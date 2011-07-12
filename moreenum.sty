@@ -99,8 +99,11 @@
 \newcommand{\nthwords}[1]{\expandafter\@nthwords\csname c@#1\endcsname}
 \newcommand{\@nthwords}[1]{%
   \ifcase#1\or First\or Second\or Third\or Fourth%
-  \or Fifth\or Sixth\or Seventh\or Eighth\or Ninth
-  \or Tenth
+  \or Fifth\or Sixth\or Seventh\or Eighth\or Ninth%
+  \or Tenth\or Eleventh\or Twelfth\or Thirteenth%
+  \or Fourteenth\or Fifteenth\or Sixteenth%
+  \or Seventeenth\or Eighteenth\or Nineteenth%
+  \or Twentieth%
   \else\@ctrerr\fi
 }
 \AddEnumerateCounter{\nthwords}{\@nthwords}{Seventh}
