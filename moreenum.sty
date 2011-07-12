@@ -10,7 +10,7 @@
 \RequirePackage{alphalph}
 \RequirePackage{enumitem}
 \input{binhex}
-
+\RequirePackage{nth}
 
 %------------------------------
 %     Lowercase Greek
@@ -74,6 +74,7 @@
 %------------------------------
 %   Lowercase Hexadecimal
 %------------------------------
+
 \newcommand*\lhex[1]{\MakeLowercase{\Hex{#1}}}
 \AddEnumerateCounter{\lhex}{\@lhex}{e}
 
@@ -84,6 +85,25 @@
 \newcommand{\binenum}[1]{\expandafter\binary\csname c@#1\endcsname}
 \AddEnumerateCounter{\binenum}{\binary}{$0$}
 
+
+%------------------------------
+%         "nth"
+%------------------------------
+\newcommand{\enumnth}[1]{\expandafter\nth\csname c@#1\endcsname}
+\AddEnumerateCounter{\enumnth}{\nth}{8th}
+
+%------------------------------
+%      "nth" words
+%------------------------------
+
+\newcommand{\nthwords}[1]{\expandafter\@nthwords\csname c@#1\endcsname}
+\newcommand{\@nthwords}[1]{%
+  \ifcase#1\or First\or Second\or Third\or Fourth%
+  \or Fifth\or Sixth\or Seventh\or Eighth\or Ninth
+  \or Tenth
+  \else\@ctrerr\fi
+}
+\AddEnumerateCounter{\nthwords}{\@nthwords}{Seventh}
 
 %------------------------------
 %  Here ends the file
