@@ -17,3 +17,6 @@ Enumitem provides a start=0 option for starting your enumerations at 0.
 
 Currently requires amsmath, alphalph, enumitem, binhex and nth,
 all of which should be part of any modern TeX distribution.
+
+Future versions might include numname or fmtcount for more flexible
+language-dependent numbers-to-words enumeration.

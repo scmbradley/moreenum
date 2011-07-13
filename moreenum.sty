@@ -11,6 +11,7 @@
 \RequirePackage{enumitem}
 \input{binhex}
 \RequirePackage{nth}
+\RequirePackage{engord}
 
 %------------------------------
 %     Lowercase Greek
@@ -68,6 +69,7 @@
 % Thanks to egreg at tex.sx for telling me about binary.tex
 % http://tex.stackexchange.com/questions/22234/why-does-enumitem-need-the-macro-to-exist-already/22236#22236
 
+
 \newcommand*{\Hex}[1]{\expandafter\hex\csname c@#1\endcsname}
 \AddEnumerateCounter{\Hex}{\hex}{E}
 
@@ -87,10 +89,29 @@
 
 
 %------------------------------
-%         "nth"
+%         raised "nth"
 %------------------------------
-\newcommand{\enumnth}[1]{\expandafter\nth\csname c@#1\endcsname}
-\AddEnumerateCounter{\enumnth}{\nth}{8th}
+
+\newcommand\raisenth[1]{%
+\engord{#1}
+}
+\newcommand\@raisenth[1]{%
+\engordnum{#1}
+}
+\AddEnumerateCounter{\raisenth}{\@raisenth}{8th}
+
+%------------------------------
+%         level "nth"
+%------------------------------
+
+\newcommand\levelnth[1]{%
+  \expandafter\@levelnth\csname c@#1\endcsname}
+
+\newcommand\@levelnth[1]{%
+  \nth{#1}
+}
+\AddEnumerateCounter{\levelnth}{\@levelnth}{8th}
+
 
 %------------------------------
 %      "nth" words
