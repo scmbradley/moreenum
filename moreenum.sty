@@ -10,7 +10,6 @@
 \RequirePackage{alphalph}
 \RequirePackage{enumitem}
 \input{binhex}
-\RequirePackage{nth}
 \RequirePackage{engord}
 
 %------------------------------
@@ -73,6 +72,8 @@
 \newcommand*{\Hex}[1]{\expandafter\hex\csname c@#1\endcsname}
 \AddEnumerateCounter{\Hex}{\hex}{E}
 
+
+
 %------------------------------
 %   Lowercase Hexadecimal
 %------------------------------
@@ -87,31 +88,35 @@
 \newcommand{\binenum}[1]{\expandafter\binary\csname c@#1\endcsname}
 \AddEnumerateCounter{\binenum}{\binary}{$0$}
 
+\newenvironment{binzero}{%
+  \begin{enumerate}[label=\binenum*,start=0]%
+  }{%
+  \end{enumerate}%
+}
 
 %------------------------------
-%         raised "nth"
+%          "nth"
 %------------------------------
 
-\newcommand\raisenth[1]{%
+\newcommand\enumnth[1]{%
 \engord{#1}
 }
-\newcommand\@raisenth[1]{%
+\newcommand\@enumnth[1]{%
 \engordnum{#1}
 }
-\AddEnumerateCounter{\raisenth}{\@raisenth}{8th}
+\AddEnumerateCounter{\enumnth}{\@enumnth}{8th}
 
-%------------------------------
-%         level "nth"
-%------------------------------
-
-\newcommand\levelnth[1]{%
-  \expandafter\@levelnth\csname c@#1\endcsname}
-
-\newcommand\@levelnth[1]{%
-  \nth{#1}
+\newenvironment{nthraise}{%
+  \engordraisetrue\begin{enumerate}[label=\enumnth*]%
+  }{%
+  \end{enumerate}%
 }
-\AddEnumerateCounter{\levelnth}{\@levelnth}{8th}
 
+\newenvironment{nthlevel}{%
+  \engordraisefalse\begin{enumerate}[label=\enumnth*]%
+  }{%
+  \end{enumerate}%
+}
 
 %------------------------------
 %      "nth" words

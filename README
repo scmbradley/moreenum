@@ -7,7 +7,7 @@ This provides the following new enumerate styles.
  - \Hex for uppercase hexadecimal enumeration
  - \lhex for lowercase hexadecimal enumeration
  - \binenum for binary enumeration
- - \enumnth for "1st", "2nd", "3rd" etc
+ - \enumnth for "1st", "2nd", "3rd" etc (comes in level and raise flavours)
  - \nthwords for "First", "Second", "Third" etc
  - \nwords for "One", "Two", "Three" etc
 
@@ -15,8 +15,17 @@ Each of these works with enumitem's "starred variant" feature.
 So \begin{enumerate}[label=\Hex*] will output a hex enumerated list.
 Enumitem provides a start=0 option for starting your enumerations at 0.
 
-Currently requires amsmath, alphalph, enumitem, binhex and nth,
+Also provides two environments nthraise and nthlevel for raised and
+level "nth"s.
+These are just wrappers for the \engordraisetrue/false switch and the
+label=\enumth* thing...
+
+Currently requires amsmath, alphalph, enumitem, binhex and engord,
 all of which should be part of any modern TeX distribution.
 
 Future versions might include numname or fmtcount for more flexible
 language-dependent numbers-to-words enumeration.
+
+This isn't so much a package designed for use as a list of recipes for
+creating your own new kinds of enumeration.
+All of the work is really done by the various packages loaded.
