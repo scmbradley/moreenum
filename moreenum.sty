@@ -19,12 +19,12 @@
 
 \ProvidesPackage{moreenum}[2011/07/14 v0.95]
 
-\RequirePackage{amsmath}
-\RequirePackage{alphalph}
-\RequirePackage{enumitem}
-\input{binhex}
-\RequirePackage{engord}
-\@ifclassloaded{memoir}{}{\RequirePackage{numname}}
+\RequirePackage{amsmath} % For Greek letters
+\RequirePackage{alphalph} % For doubling Greek letters
+\RequirePackage{enumitem} % The enumeration workhorse
+\input{binhex} % For binary and hexadecimal numbering
+\RequirePackage{engord} % For ordinal numbering
+\@ifclassloaded{memoir}{}{\RequirePackage{numname}} % For named numbers if memoir isn't loaded.
 
 %------------------------------
 %     Lowercase Greek
@@ -33,6 +33,8 @@
 % Thanks to T.D.'s answer on tex.sx for the basic insight
 % into how to achieve this.
 % http://tex.stackexchange.com/questions/4058/greek-numbering/4063#4063
+% And to Will Robertson's answer to the same question for pointing me to
+% the alphalph package
 
 \newcommand*{\single@greek}[1]{%
   \expandafter\@single@greek\csname c@#1\endcsname
@@ -139,6 +141,7 @@
 % Thanks to egreg for fixing numname and making the numname commands
 % work with labels properly.
 % http://tex.stackexchange.com/q/23043/215
+
 
 \newcommand{\nthwords}[1]{\expandafter\@nthwords\csname c@#1\endcsname}
 \newcommand*{\@nthwords}[1]{%

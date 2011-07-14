@@ -1,4 +1,6 @@
-This is the readme for moreenum.sty
+This is the README for moreenum.sty
+The author/maintainer of this work is Seamus Bradley.
+tex@seamusbradley.net
 
 This provides the following new enumerate styles.
 
@@ -24,9 +26,6 @@ label=\enumth* thing...
 
 Currently requires amsmath, alphalph, enumitem, binhex, engord, and numname
 all of which should be part of any modern TeX distribution.
-
-Future versions might include fmtcount for more flexible
-"nth"-type enumerations.
 
 This isn't so much a package designed for use as a list of recipes for
 creating your own new kinds of enumeration.
