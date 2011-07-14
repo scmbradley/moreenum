@@ -11,6 +11,7 @@
 \RequirePackage{enumitem}
 \input{binhex}
 \RequirePackage{engord}
+\@ifclassloaded{memoir}{}{\RequirePackage{numname}}
 
 %------------------------------
 %     Lowercase Greek
@@ -122,16 +123,13 @@
 %      "nth" words
 %------------------------------
 
+% Thanks to egreg for fixing numname and making the numname commands
+% work with labels properly.
+% http://tex.stackexchange.com/q/23043/215
+
 \newcommand{\nthwords}[1]{\expandafter\@nthwords\csname c@#1\endcsname}
-\newcommand{\@nthwords}[1]{%
-  \ifcase#1\or First\or Second\or Third\or Fourth%
-  \or Fifth\or Sixth\or Seventh\or Eighth\or Ninth%
-  \or Tenth\or Eleventh\or Twelfth\or Thirteenth%
-  \or Fourteenth\or Fifteenth\or Sixteenth%
-  \or Seventeenth\or Eighteenth\or Nineteenth%
-  \or Twentieth%
-  \else\@ctrerr\fi
-}
+\newcommand*{\@nthwords}[1]{%
+  \protect\ordinaltoName{\number#1}}
 \AddEnumerateCounter{\nthwords}{\@nthwords}{Seventeenth}
 
 
@@ -140,14 +138,8 @@
 %------------------------------
 
 \newcommand{\nwords}[1]{\expandafter\@nwords\csname c@#1\endcsname}
-\newcommand{\@nwords}[1]{%
-  \ifcase#1\or One\or Two\or Three\or Four\or Five%
-  \or Six\or Seven\or Eight\or Nine\or Ten\or Eleven%
-  \or Twelve\or Thirteen\or Fourteen\or Fifteen%
-  \or Sixteen\or Seventeen\or Eighteen\or Nineteen%
-  \or Twenty%
-  \else\@ctrerr\fi
-}
+\newcommand*{\@nwords}[1]{%
+  \protect\numtoName{\number#1}}
 \AddEnumerateCounter{\nwords}{\@nwords}{Seventeen}
 
 %------------------------------

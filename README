@@ -13,19 +13,30 @@ This provides the following new enumerate styles.
 
 Each of these works with enumitem's "starred variant" feature.
 So \begin{enumerate}[label=\Hex*] will output a hex enumerated list.
-Enumitem provides a start=0 option for starting your enumerations at 0.
+Enumitem provides a start=0 option for starting your enumerations at
+0.
+A binzero environment is provided for binary starting at zero enumeration.
 
 Also provides two environments nthraise and nthlevel for raised and
 level "nth"s.
 These are just wrappers for the \engordraisetrue/false switch and the
 label=\enumth* thing...
 
-Currently requires amsmath, alphalph, enumitem, binhex and engord,
+Currently requires amsmath, alphalph, enumitem, binhex, engord, and numname
 all of which should be part of any modern TeX distribution.
 
-Future versions might include numname or fmtcount for more flexible
-language-dependent numbers-to-words enumeration.
+Future versions might include fmtcount for more flexible
+"nth"-type enumerations.
 
 This isn't so much a package designed for use as a list of recipes for
 creating your own new kinds of enumeration.
 All of the work is really done by the various packages loaded.
+
+TO DO:
+
+ - Properly namespace the internal macros.
+ - Make consistent the way the macros for counters and numbers are
+   treated.
+ - Replace engord and binhex by fmtcount? (Might not be possible).
+ - Add hexzero and Hexzero environments (properly namespaced)
+
