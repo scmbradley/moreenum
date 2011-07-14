@@ -6,10 +6,11 @@ This provides the following new enumerate styles.
 
  - \greek for lowercase Greek letters
  - \Greek for uppercase Greek letters
- - \Hex for uppercase hexadecimal enumeration
- - \lhex for lowercase hexadecimal enumeration
- - \binenum for binary enumeration
- - \enumnth for "1st", "2nd", "3rd" etc (comes in level and raise flavours)
+ - \enumHex for uppercase hexadecimal enumeration
+ - \enumhex for lowercase hexadecimal enumeration
+ - \enumbinary for binary enumeration
+ - \raisenth for 1st, 2nd, 3rd etc with raised "th"s
+ - \levelnth for 1st, 2nd 3rd with level "th"s
  - \nthwords for "First", "Second", "Third" etc
  - \nwords for "One", "Two", "Three" etc
 
@@ -18,24 +19,40 @@ So \begin{enumerate}[label=\Hex*] will output a hex enumerated list.
 Enumitem provides a start=0 option for starting your enumerations at
 0.
 A binzero environment is provided for binary starting at zero enumeration.
+Likewise enumHexzero and enumhexzero for the hex enumerations.
 
-Also provides two environments nthraise and nthlevel for raised and
-level "nth"s.
-These are just wrappers for the \engordraisetrue/false switch and the
-label=\enumth* thing...
-
-Currently requires amsmath, alphalph, enumitem, binhex, engord, and numname
+Currently requires amsmath, alphalph, enumitem, fmtcount and numname
 all of which should be part of any modern TeX distribution.
 
 This isn't so much a package designed for use as a list of recipes for
 creating your own new kinds of enumeration.
 All of the work is really done by the various packages loaded.
 
+TWO WARNINGS:
+
+ - You probably don't want to use uppercase greek numbering. Ever.
+ - Be careful with uppercase Hex numbering for sections if you also
+   have appendices. 
+ - (A more general version of the last point) Don't mix \Alph and
+   \enumHex, or \alph and \enumhex
+
 TO DO:
 
  - Properly namespace the internal macros.
  - Make consistent the way the macros for counters and numbers are
    treated.
- - Replace engord and binhex by fmtcount? (Might not be possible).
- - Add hexzero and Hexzero environments (properly namespaced)
+ - Test spacing of enumerations.
+
+
+CHANGELOG
+See https://github.com/scmbradley/moreenum for a full changelog
+
+v1.0
+  levelnth and raisenth work with fmtcount
+  fmtcount also replaces binhex.tex
+v0.95 
+  levelnth and raisenth work through environments with engord's switch
+  numname used for nwords and nthwords
+v0.9 
+  Initial version
 

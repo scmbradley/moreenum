@@ -19,12 +19,21 @@
 
 \ProvidesPackage{moreenum}[2011/07/14 v0.95]
 
+
 \RequirePackage{amsmath} % For Greek letters
 \RequirePackage{alphalph} % For doubling Greek letters
 \RequirePackage{enumitem} % The enumeration workhorse
-\input{binhex} % For binary and hexadecimal numbering
-\RequirePackage{engord} % For ordinal numbering
+
 \@ifclassloaded{memoir}{}{\RequirePackage{numname}} % For named numbers if memoir isn't loaded.
+\RequirePackage{fmtcount}
+
+
+% Previous versions relied on the following packages that have been superceded
+% in the latest version.
+% \input{binhex} % Replaced by fmtcount
+% \RequirePackage{engord} % Replaced by fmtcount
+
+
 
 %------------------------------
 %     Lowercase Greek
@@ -83,56 +92,75 @@
 
 % Thanks to egreg at tex.sx for telling me about binary.tex
 % http://tex.stackexchange.com/questions/22234/why-does-enumitem-need-the-macro-to-exist-already/22236#22236
+% Although binary.tex has now been replaced by fmtcount
 
+\newcommand*{\enumHex}[1]{%
+  \expandafter\@enumHex\csname c@#1\endcsname}
+\newcommand*{\@enumHex}[1]{%
+  \protect\Hexadecimalnum{\number#1}}
+\AddEnumerateCounter{\enumHex}{\@enumHex}{AAAA}
 
-\newcommand*{\Hex}[1]{\expandafter\hex\csname c@#1\endcsname}
-\AddEnumerateCounter{\Hex}{\hex}{E}
-
+\newenvironment{enumHexzero}{%
+  \begin{enumerate}[label=\enumHex*,start=0]%
+  }{%
+  \end{enumerate}%
+}
 
 
 %------------------------------
 %   Lowercase Hexadecimal
 %------------------------------
 
-\newcommand*\lhex[1]{\MakeLowercase{\Hex{#1}}}
-\AddEnumerateCounter{\lhex}{\@lhex}{e}
+\newcommand*{\enumhex}[1]{%
+  \expandafter\@enumhex\csname c@#1\endcsname}
+\newcommand*{\@enumhex}[1]{%
+  \protect\hexadecimalnum{\number#1}}
+\AddEnumerateCounter{\enumhex}{\@enumhex}{aaaa}
+
+\newenvironment{enumhexzero}{%
+  \begin{enumerate}[label=\enumhex*,start=0]%
+  }{%
+  \end{enumerate}%
+}
 
 %------------------------------
 %         Binary
 %------------------------------
 
-\newcommand{\binenum}[1]{\expandafter\binary\csname c@#1\endcsname}
-\AddEnumerateCounter{\binenum}{\binary}{$0$}
+\newcommand*{\enumbinary}[1]{%
+  \expandafter\@enumbinary\csname c@#1\endcsname}
+\newcommand*{\@enumbinary}[1]{%
+  \protect\binarynum{\number#1}}
+\AddEnumerateCounter{\enumbinary}{\@enumbinary}{0000}
 
-\newenvironment{binzero}{%
-  \begin{enumerate}[label=\binenum*,start=0]%
+\newenvironment{enumbinzero}{%
+  \begin{enumerate}[label=\enumbinary*,start=0]%
   }{%
   \end{enumerate}%
 }
 
 %------------------------------
-%          "nth"
+%      "nth" (raised)
 %------------------------------
 
-\newcommand\enumnth[1]{%
-\engord{#1}
-}
-\newcommand\@enumnth[1]{%
-\engordnum{#1}
-}
-\AddEnumerateCounter{\enumnth}{\@enumnth}{8th}
+\newcommand*{\raisenth}[1]{%
+  \expandafter\@raisenth\csname c@#1\endcsname}
+\newcommand*{\@raisenth}[1]{%
+  \protect\fmtcountsetoptions{fmtord=raise}%
+  \protect\ordinalnum{\number#1}}
+\AddEnumerateCounter{\raisenth}{\@raisenth}{~2nd}
 
-\newenvironment{nthraise}{%
-  \engordraisetrue\begin{enumerate}[label=\enumnth*]%
-  }{%
-  \end{enumerate}%
-}
 
-\newenvironment{nthlevel}{%
-  \engordraisefalse\begin{enumerate}[label=\enumnth*]%
-  }{%
-  \end{enumerate}%
-}
+%------------------------------
+%      "nth" (level)
+%------------------------------
+
+\newcommand*{\levelnth}[1]{%
+  \expandafter\@levelnth\csname c@#1\endcsname}
+\newcommand*{\@levelnth}[1]{%
+  \protect\fmtcountsetoptions{fmtord=level}%
+  \protect\ordinalnum{\number#1}}
+\AddEnumerateCounter{\levelnth}{\@levelnth}{~2nd}
 
 %------------------------------
 %      "nth" words
@@ -141,6 +169,8 @@
 % Thanks to egreg for fixing numname and making the numname commands
 % work with labels properly.
 % http://tex.stackexchange.com/q/23043/215
+% This also gave me the clue I needed to get levelnth and raisenth working as
+% separate labels.
 
 
 \newcommand{\nthwords}[1]{\expandafter\@nthwords\csname c@#1\endcsname}
@@ -157,6 +187,7 @@
 \newcommand*{\@nwords}[1]{%
   \protect\numtoName{\number#1}}
 \AddEnumerateCounter{\nwords}{\@nwords}{Seventeen}
+
 
 %------------------------------
 %  Here ends the file
