@@ -26,7 +26,7 @@ Enumitem provides a start=0 option for starting your enumerations at
 A binzero environment is provided for binary starting at zero enumeration.
 Likewise enumoctzero, enumHexzero and enumhexzero for the hex enumerations.
 
-Currently requires amsmath, alphalph, enumitem, fmtcount and numname
+Currently requires amsmath, alphalph, enumitem and fmtcount 
 all of which should be part of any modern TeX distribution.
 
 This isn't so much a package designed for use as a list of recipes for
@@ -52,6 +52,8 @@ TO DO:
 CHANGELOG
 See https://github.com/scmbradley/moreenum for a full changelog
 
+v1.01
+  NWORDS and friends now supported
 v1.0
   levelnth and raisenth work with fmtcount
   fmtcount also replaces binhex.tex
