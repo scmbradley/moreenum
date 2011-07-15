@@ -29,14 +29,18 @@
 %\usepackage{tgcursor}
 \usepackage[ocr-a]{ocr}
 
+\newcounter{namespacer}
+\newcommand\namespace{\the\value{namespacer}}
+
 \newcommand\testenumerate[1]{%
-  \bigskip
+  \bigskip\stepcounter{namespacer}
   \begin{minipage}{0.4\linewidth}
   {\qquad\Large\texttt{\textbackslash #1}}
   \begin{enumerate}[label=\csname #1\endcsname*]
-  \item Liberty
+  \item Liberty: \expandafter\ref{\namespace}
   \item Equality
-  \item Fraternity\setcounter{enumi}{41}
+  \item Fraternity\expandafter\label{\namespace}
+    \setcounter{enumi}{41}
   \item Meaning of life
   \end{enumerate}
   \end{minipage}
@@ -142,7 +146,8 @@ In brackets are the |moreenum|-defined enumerations affected.
 \begin{itemize}
 \item |\binary| and friends break at 131072 [|\enumbinary|]
 \item |\hexadecimal| and friends break at 1048576 [|\enumhex| and |\enumHex|]
-\item |\numberstring| and friends break at 100000 [|\nwords| and |\nthwords|]
+\item |\numberstring| and friends break at 100000 [|\nwords|,
+  |\nthwords| and friends]
 \end{itemize}
 
 None of these is a serious limitation.
@@ -156,7 +161,10 @@ limitations.\footnote{%
 
 
 \section{Examples of the enumerations}
-Here are examples of all the kinds of enumeration that the package defines:
+Here are examples of all the kinds of enumeration that the package
+defines.
+The first item contains a reference to the third.
+This is to test if the referencing is working.
 % \dotest{greek,Greek,enumHex,enumhex,enumbinary,raisenth,levelnth,nthwords,nwords}
 
 \small\noindent
