@@ -140,6 +140,24 @@
 }
 
 %------------------------------
+%         Binary
+%------------------------------
+
+\newcommand*{\enumoctal}[1]{%
+  \expandafter\@enumoctal\csname c@#1\endcsname}
+\newcommand*{\@enumoctal}[1]{%
+  \protect\octalnum{\number#1}}
+\AddEnumerateCounter{\enumoctal}{\@enumoctal}{0000}
+
+\newenvironment{enumoctzero}{%
+  \begin{enumerate}[label=\enumoctal*,start=0]%
+  }{%
+  \end{enumerate}%
+}
+
+
+
+%------------------------------
 %      "nth" (raised)
 %------------------------------
 
@@ -172,21 +190,70 @@
 % This also gave me the clue I needed to get levelnth and raisenth working as
 % separate labels.
 
+  %%-----------------------------
+  %% Capitalised
+  %%-----------------------------
 
-\newcommand{\nthwords}[1]{\expandafter\@nthwords\csname c@#1\endcsname}
-\newcommand*{\@nthwords}[1]{%
+\newcommand{\Nthwords}[1]{\expandafter\@Nthwords\csname c@#1\endcsname}
+\newcommand*{\@Nthwords}[1]{%
   \protect\Numberstringnum{\number#1}}
-\AddEnumerateCounter{\nthwords}{\@nthwords}{Seventeenth}
+\AddEnumerateCounter{\Nthwords}{\@Nthwords}{Seventeenth}
+
+  %%-----------------------------
+  %% UPPERCASE
+  %%-----------------------------
+
+\newcommand*{\NTHWORDS}[1]{
+  \expandafter\@NTHWORDS\csname c@#1\endcsname}
+\newcommand*{\@NTHWORDS}[1]{
+  \protect\NUMBERstringnum{\number#1}}
+\AddEnumerateCounter{\NTHWORDS}{\@NTHWORDS}{FORTY-TWO}
+
+  %%-----------------------------
+  %% lowercase
+  %%-----------------------------
+
+\newcommand*{\nthwords}[1]{
+  \expandafter\@nthwords\csname c@#1\endcsname}
+\newcommand*{\@nthwords}[1]{
+  \protect\numberstringnum{\number#1}}
+\AddEnumerateCounter{\nthwords}{\@nthwords}{forty-two}
+
 
 
 %------------------------------
 %        "n" words
 %------------------------------
 
+  %%-----------------------------
+  %% Capitalised
+  %%-----------------------------
+
+\newcommand{\Nwords}[1]{\expandafter\@Nwords\csname c@#1\endcsname}
+\newcommand*{\@Nwords}[1]{%
+  \protect\Ordinalstringnum{\number#1}}
+\AddEnumerateCounter{\Nwords}{\@Nwords}{Seventeen}
+
+
+
+  %%-----------------------------
+  %% UPPERCASE
+  %%-----------------------------
+
+\newcommand{\NWORDS}[1]{\expandafter\@NWORDS\csname c@#1\endcsname}
+\newcommand*{\@NWORDS}[1]{%
+  \protect\ORDINALstringnum{\number#1}}
+\AddEnumerateCounter{\NWORDS}{\@NWORDS}{SEVENTEEN}
+
+
+  %%-----------------------------
+  %% lowercase
+  %%-----------------------------
+
 \newcommand{\nwords}[1]{\expandafter\@nwords\csname c@#1\endcsname}
 \newcommand*{\@nwords}[1]{%
-  \protect\Ordinalstringnum{\number#1}}
-\AddEnumerateCounter{\nwords}{\@nwords}{Seventeen}
+  \protect\ordinalstringnum{\number#1}}
+\AddEnumerateCounter{\nwords}{\@nwords}{seventeen}
 
 
 %------------------------------
