@@ -14,25 +14,25 @@
   % The Current Maintainer of this work is Seamus Bradley
   % tex@seamusbradley.net
   %
-  % This work consists of the files moreenum.sty and README
+  % This work consists of the files moreenum.sty,testcase-moreenum.tex
+  % and README and the derived file testcase-moreenum.pdf
 
 
-\ProvidesPackage{moreenum}[2011/07/14 v0.95]
+\ProvidesPackage{moreenum}[2011/07/15 v1.0]
 
 
 \RequirePackage{amsmath} % For Greek letters
 \RequirePackage{alphalph} % For doubling Greek letters
 \RequirePackage{enumitem} % The enumeration workhorse
-
-\@ifclassloaded{memoir}{}{\RequirePackage{numname}} % For named numbers if memoir isn't loaded.
-\RequirePackage{fmtcount}
+\RequirePackage{fmtcount} % The number translation workhorse
 
 
 % Previous versions relied on the following packages that have been superceded
 % in the latest version.
 % \input{binhex} % Replaced by fmtcount
 % \RequirePackage{engord} % Replaced by fmtcount
-
+% \@ifclassloaded{memoir}{}{\RequirePackage{numname}} % For named
+% numbers if memoir isn't loaded. Replaced by fmtcount
 
 
 %------------------------------
@@ -175,7 +175,7 @@
 
 \newcommand{\nthwords}[1]{\expandafter\@nthwords\csname c@#1\endcsname}
 \newcommand*{\@nthwords}[1]{%
-  \protect\ordinaltoName{\number#1}}
+  \protect\Numberstringnum{\number#1}}
 \AddEnumerateCounter{\nthwords}{\@nthwords}{Seventeenth}
 
 
@@ -185,7 +185,7 @@
 
 \newcommand{\nwords}[1]{\expandafter\@nwords\csname c@#1\endcsname}
 \newcommand*{\@nwords}[1]{%
-  \protect\numtoName{\number#1}}
+  \protect\Ordinalstringnum{\number#1}}
 \AddEnumerateCounter{\nwords}{\@nwords}{Seventeen}
 
 
