@@ -9,17 +9,22 @@ This provides the following new enumerate styles.
  - \enumHex for uppercase hexadecimal enumeration
  - \enumhex for lowercase hexadecimal enumeration
  - \enumbinary for binary enumeration
+ - \enumoctal for octal enumeration
  - \raisenth for 1st, 2nd, 3rd etc with raised "th"s
  - \levelnth for 1st, 2nd 3rd with level "th"s
- - \nthwords for "First", "Second", "Third" etc
- - \nwords for "One", "Two", "Three" etc
+ - \Nthwords for "First", "Second", "Third" etc
+ - \nthwords for "first", "second", "third" etc
+ - \NTHWORDS for "FIRST", "SECOND", "THIRD" etc
+ - \Nwords for "One", "Two", "Three" etc
+ - \nwords for "one", "two", "three" etc
+ - \NWORDS for "ONE", "TWO", "THREE" etc
 
 Each of these works with enumitem's "starred variant" feature.
 So \begin{enumerate}[label=\Hex*] will output a hex enumerated list.
 Enumitem provides a start=0 option for starting your enumerations at
 0.
 A binzero environment is provided for binary starting at zero enumeration.
-Likewise enumHexzero and enumhexzero for the hex enumerations.
+Likewise enumoctzero, enumHexzero and enumhexzero for the hex enumerations.
 
 Currently requires amsmath, alphalph, enumitem, fmtcount and numname
 all of which should be part of any modern TeX distribution.
@@ -50,6 +55,7 @@ See https://github.com/scmbradley/moreenum for a full changelog
 v1.0
   levelnth and raisenth work with fmtcount
   fmtcount also replaces binhex.tex
+  fmtcount also replaces numname
 v0.95 
   levelnth and raisenth work through environments with engord's switch
   numname used for nwords and nthwords
