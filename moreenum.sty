@@ -75,7 +75,7 @@
   \or Z\or E\or\Theta\or I\or K\or\Lambda
   \or M\or N\or \Xi\or O\or\Pi\or P\or\Sigma
   \or T\or Y\or\Phi\or X\or\Psi\or\Omega
-  \else\@ctrerr\fi$
+  \else\@ctrerr\fi$%
 }
 
 \newalphalph{\@Greek}[alph]{\@Single@Greek}{24}
@@ -196,7 +196,7 @@
 
 \newcommand{\Nthwords}[1]{\expandafter\@Nthwords\csname c@#1\endcsname}
 \newcommand*{\@Nthwords}[1]{%
-  \protect\Numberstringnum{\number#1}}
+  \protect\Ordinalstringnum{\number#1}}
 \AddEnumerateCounter{\Nthwords}{\@Nthwords}{Seventeenth}
 
   %%-----------------------------
@@ -206,7 +206,7 @@
 \newcommand*{\NTHWORDS}[1]{
   \expandafter\@NTHWORDS\csname c@#1\endcsname}
 \newcommand*{\@NTHWORDS}[1]{
-  \protect\NUMBERstringnum{\number#1}}
+  \protect\ORDINALstringnum{\number#1}}
 \AddEnumerateCounter{\NTHWORDS}{\@NTHWORDS}{FORTY-TWO}
 
   %%-----------------------------
@@ -216,7 +216,7 @@
 \newcommand*{\nthwords}[1]{
   \expandafter\@nthwords\csname c@#1\endcsname}
 \newcommand*{\@nthwords}[1]{
-  \protect\numberstringnum{\number#1}}
+  \protect\ordinalstringnum{\number#1}}
 \AddEnumerateCounter{\nthwords}{\@nthwords}{forty-two}
 
 
@@ -231,7 +231,7 @@
 
 \newcommand{\Nwords}[1]{\expandafter\@Nwords\csname c@#1\endcsname}
 \newcommand*{\@Nwords}[1]{%
-  \protect\Ordinalstringnum{\number#1}}
+  \protect\Numberstringnum{\number#1}}
 \AddEnumerateCounter{\Nwords}{\@Nwords}{Seventeen}
 
 
@@ -242,7 +242,7 @@
 
 \newcommand{\NWORDS}[1]{\expandafter\@NWORDS\csname c@#1\endcsname}
 \newcommand*{\@NWORDS}[1]{%
-  \protect\ORDINALstringnum{\number#1}}
+  \protect\NUMBERstringnum{\number#1}}
 \AddEnumerateCounter{\NWORDS}{\@NWORDS}{SEVENTEEN}
 
 
@@ -252,7 +252,7 @@
 
 \newcommand{\nwords}[1]{\expandafter\@nwords\csname c@#1\endcsname}
 \newcommand*{\@nwords}[1]{%
-  \protect\ordinalstringnum{\number#1}}
+  \protect\numberstringnum{\number#1}}
 \AddEnumerateCounter{\nwords}{\@nwords}{seventeen}
 
 
