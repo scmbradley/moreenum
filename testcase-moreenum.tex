@@ -36,7 +36,7 @@
   \bigskip\stepcounter{namespacer}
   \begin{minipage}{0.4\linewidth}
   {\qquad\Large\texttt{\textbackslash #1}}
-  \begin{enumerate}[label=\csname #1\endcsname*]
+  \begin{enumerate}[label={\csname #1\endcsname*.}]
   \item Liberty: \expandafter\ref{\namespace}
   \item Equality
   \item Fraternity\expandafter\label{\namespace}
@@ -157,7 +157,9 @@ straightforward to define yourself using |binhex| for the numbers and
 limitations.\footnote{%
   Why don't I just use those packages instead?
   Because having |fmtcount| do most of the work means only loading one
-  package instead of 3 (|numname|, |binhex| and |nth| or |engord|).}
+  package instead of 3 (|numname|, |binhex| and |nth| or |engord|).
+  Also, |fmtcount| can speak different languages, 
+  and in future releases I'm tempted to try to get that working here.}
 
 
 \section{Examples of the enumerations}
@@ -165,6 +167,9 @@ Here are examples of all the kinds of enumeration that the package
 defines.
 The first item contains a reference to the third.
 This is to test if the referencing is working.
+The labels have dots after them, to check whether errant spaces are
+being added after the labels.\footnote{Thanks to Kevin Klement for
+  pointing this issue out to me.}
 % \dotest{greek,Greek,enumHex,enumhex,enumbinary,raisenth,levelnth,nthwords,nwords}
 
 \small\noindent
