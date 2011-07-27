@@ -1,0 +1,12 @@
+\documentclass{article}
+\usepackage{moreenum}
+\begin{document}
+\begin{enumerate}%[label={\greek*.}]
+\renewcommand{\labelenumi}{\greek{enumi}.}
+\item First
+\item Second
+\item Third
+\setcounter{enumi}{42}
+\item Again
+\end{enumerate}
+\end{document}

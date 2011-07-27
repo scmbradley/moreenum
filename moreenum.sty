@@ -46,19 +46,19 @@
 % the alphalph package
 
 \newcommand*{\single@greek}[1]{%
-  \expandafter\@single@greek\csname c@#1\endcsname
+  \expandafter\@single@greek\csname c@#1\endcsname%
 }
 \newcommand*{\@single@greek}[1]{%
   $\ifcase#1\or\alpha\or\beta\or\gamma\or\delta\or\varepsilon
     \or\zeta\or\eta\or\theta\or\iota\or\kappa\or\lambda
     \or\mu\or\nu\or\xi\or o\or\pi\or\varrho\or\sigma
     \or\tau\or\upsilon\or\phi\or\chi\or\psi\or\omega
-    \else\@ctrerr\fi$
+    \else\@ctrerr\fi$%
 }
 
 \newalphalph{\@greek}[alph]{\@single@greek}{24}
 \newcommand*{\greek}[1]{%
-  \expandafter\@greek\csname c@#1\endcsname
+  \expandafter\@greek\csname c@#1\endcsname%
 }
 
 \AddEnumerateCounter{\greek}{\@greek}{$\omega$}
