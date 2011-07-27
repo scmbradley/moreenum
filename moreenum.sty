@@ -18,7 +18,7 @@
   % and README and the derived file testcase-moreenum.pdf
 
 
-\ProvidesPackage{moreenum}[2011/07/15 v1.01]
+\ProvidesPackage{moreenum}[2011/07/27 v1.02]
 
 
 \RequirePackage{amsmath} % For Greek letters
@@ -44,6 +44,8 @@
 % http://tex.stackexchange.com/questions/4058/greek-numbering/4063#4063
 % And to Will Robertson's answer to the same question for pointing me to
 % the alphalph package
+% Thanks to Kevin Klement for pointing out a spacing problem 
+% with the Greek commands that is now fixed.
 
 \newcommand*{\single@greek}[1]{%
   \expandafter\@single@greek\csname c@#1\endcsname%
