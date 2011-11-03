@@ -1,0 +1,201 @@
+\documentclass[paper=A4,fontsize=12]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{etoolbox}
+\usepackage{multicol}
+\usepackage{listings}
+\lstloadlanguages{[LaTeX]TeX} % I need to tell listings how I want code typeset. Here come some options:
+\lstset{% 
+    basicstyle=\ttfamily\small, 
+    commentstyle=\itshape\ttfamily\small, 
+    showspaces=false, 
+    showstringspaces=false, 
+    breaklines=true, 
+    breakautoindent=true, 
+    captionpos=t,
+    frame=single,
+    escapeinside={(*}{*)},
+} 
+\catcode`|=\active
+\def|{\lstinline|}
+
+\usepackage{moreenum}
+\usepackage{etoolbox}
+\author{Seamus Bradley}
+\title{\texttt{moreenum}}
+\usepackage{tgpagella}
+\usepackage{tgheros}
+%\usepackage{tgcursor}
+\usepackage[ocr-a]{ocr}
+
+\newcounter{namespacer}
+\newcommand\namespace{\the\value{namespacer}}
+
+\newcommand\testenumerate[1]{%
+  \bigskip\stepcounter{namespacer}
+  \begin{minipage}{0.4\linewidth}
+  {\qquad\Large\texttt{\textbackslash #1}}
+  \begin{enumerate}[label={\csname #1\endcsname*.}]
+  \item Liberty: \expandafter\ref{\namespace}
+  \item Equality
+  \item Fraternity\expandafter\label{\namespace}
+    \setcounter{enumi}{41}
+  \item Meaning of life
+  \end{enumerate}
+  \end{minipage}
+}
+\newcommand\dotest[1]{%
+  \let\do\testenumerate
+  \docsvlist}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  This package provides more enumeration styles for |enumerate| environments.
+  The styles are supposed to work with |enumitem|.
+  This is |moreenum| version 1.03.
+\end{abstract}
+\section{Basic procedure}
+
+At the heart of each new enumeration is the following procedure:
+
+\begin{lstlisting}
+  \newcommand*{\macro}[1]{%
+    \expandafter\@macro\csname c@#1\endcsname}
+  \newcommand*{\@macro}[1]{%
+    \translate{#1}}
+  \AddEnumerateCounter{\macro}{\@macro}{distance}
+\end{lstlisting}
+
+From a user perspective, \lstinline+\macro+ takes a counter as its
+argument and outputs, say, a
+binary number or whatever you want. 
+Actually, what it really does is turn a counter into a number and pass
+the number to \lstinline+\@macro+ which does the real work.
+It takes a number and translates it into the final representation.
+
+Most of the cleverness is done by \lstinline+\translate+ and these are
+mostly macros I've borrowed from other packages.
+
+The |distance| is the widest entry in the enumeration.
+|moreenum| hasn't been tested much with this parameter:
+I've just guessed a bit at what's the widest enumerations are likely
+to get.
+Enumerations can \emph{theoretically} get up to 2147483647 items long.
+Which would be rather a long number.\footnote{%
+  |fmcount| doesn't seem to work with numbers that big, actually. 
+  But even 131071 is \binarynum{131071}}
+
+The |\greek| macro is a little more involved because it involves first
+defining a macro that turns numbers into Greek letters.
+
+\begin{lstlisting}
+\newcommand*{\single@greek}[1]{%
+  \expandafter\@single@greek\csname c@#1\endcsname
+}
+\newcommand*{\@single@greek}[1]{%
+  $\ifcase#1\or\alpha\or\beta\or\gamma\or\delta\or\varepsilon
+    \or\zeta\or\eta\or\theta\or\iota\or\kappa\or\lambda
+    \or\mu\or\nu\or\xi\or o\or\pi\or\varrho\or\sigma
+    \or\tau\or\upsilon\or\phi\or\chi\or\psi\or\omega
+    \else\@ctrerr\fi$
+}
+\end{lstlisting}
+
+Then you need to define what to do when you run out of letters.
+You start again at $\alpha\alpha$.
+The clever work there is done by the |alphalph| package.
+
+\begin{lstlisting}
+\newalphalph{\@greek}[alph]{\@single@greek}{24}
+\newcommand*{\greek}[1]{%
+  \expandafter\@greek\csname c@#1\endcsname
+}
+
+\AddEnumerateCounter{\greek}{\@greek}{$\omega$}
+\end{lstlisting}
+
+Some sophistication is required to get the |\translate|-style macros
+to play nice with |\label| and |\ref| facilities.
+This can be seen in the following example.
+
+\begin{lstlisting}
+\newcommand*{\enumHex}[1]{%
+  \expandafter\@enumHex\csname c@#1\endcsname}
+\newcommand*{\@enumHex}[1]{%
+  \protect\Hexadecimalnum{\number#1}}
+\AddEnumerateCounter{\enumHex}{\@enumHex}{AAAA}
+\end{lstlisting}
+
+The |\protect| makes sure the |\Hexadecimalnum| get written to the
+|.aux| file, rather than expanded first.
+The |\number| makes sure the number \emph{is} written to the |.aux|
+file.\footnote{I'm actually guessing here. 
+  I have no idea.
+  I got the clue from |egreg| here:
+  \url{http://tex.stackexchange.com/q/22234/215}}
+
+\section{Limitations}
+
+The biggest number TeX can handle is 2147483647.
+I can't imagine this ever being a serious limitation to your
+enumerating.
+
+There are, however, some further limitations.
+Certain |fmtcount| macros seem to break before they hit this
+fundamental limit.
+In brackets are the |moreenum|-defined enumerations affected.
+\begin{itemize}
+\item |\binary| and friends break at 131072 [|\enumbinary|]
+\item |\hexadecimal| and friends break at 1048576 [|\enumhex| and |\enumHex|]
+\item |\numberstring| and friends break at 100000 [|\nwords|,
+  |\nthwords| and friends]
+\end{itemize}
+
+None of these is a serious limitation.
+If you desperately need bigger enumerations, they are fairly
+straightforward to define yourself using |binhex| for the numbers and
+|numname| for the words: these packages don't have these
+limitations.\footnote{%
+  Why don't I just use those packages instead?
+  Because having |fmtcount| do most of the work means only loading one
+  package instead of 3 (|numname|, |binhex| and |nth| or |engord|).
+  Also, |fmtcount| can speak different languages, 
+  and in future releases I'm tempted to try to get that working here.}
+
+
+\section{Examples of the enumerations}
+Here are examples of all the kinds of enumeration that the package
+defines.
+The first item contains a reference to the third.
+This is to test if the referencing is working.
+The labels have dots after them, to check whether errant spaces are
+being added after the labels.\footnote{Thanks to Kevin Klement for
+  pointing this issue out to me.}
+% \dotest{greek,Greek,enumHex,enumhex,enumbinary,raisenth,levelnth,nthwords,nwords}
+
+\small\noindent
+\testenumerate{greek}\hfil
+\testenumerate{Greek}
+\testenumerate{enumHex}\hfil
+\testenumerate{enumhex}
+\testenumerate{enumbinary}\hfil
+\testenumerate{enumoctal}
+\testenumerate{raisenth}\hfil
+\testenumerate{levelnth}
+\testenumerate{Nthwords}\hfil
+\testenumerate{Nwords}
+\testenumerate{NTHWORDS}\hfil
+\testenumerate{NWORDS}
+\testenumerate{nthwords}\hfil
+\testenumerate{nwords}
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

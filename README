@@ -52,6 +52,9 @@ TO DO:
 CHANGELOG
 See https://github.com/scmbradley/moreenum for a full changelog
 
+v1.02
+  Spacing issues fixed
+  \nwords and friends and \nthwords and friends are now the right way round.
 v1.01
   NWORDS and friends now supported
 v1.0
