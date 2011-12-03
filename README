@@ -18,6 +18,7 @@ This provides the following new enumerate styles.
  - \Nwords for "One", "Two", "Three" etc
  - \nwords for "one", "two", "three" etc
  - \NWORDS for "ONE", "TWO", "THREE" etc
+ - \dicecount for little pictures of dice
 
 Each of these works with enumitem's "starred variant" feature.
 So \begin{enumerate}[label=\Hex*] will output a hex enumerated list.

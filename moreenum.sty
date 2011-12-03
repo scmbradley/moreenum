@@ -25,7 +25,7 @@
 \RequirePackage{alphalph} % For doubling Greek letters
 \RequirePackage{enumitem} % The enumeration workhorse
 \RequirePackage{fmtcount} % The number translation workhorse
-
+\RequirePackage{epsdice} % For dicecount
 
 % Previous versions relied on the following packages that have been superceded
 % in the latest version.
@@ -256,6 +256,26 @@
 \newcommand*{\@nwords}[1]{%
   \protect\numberstringnum{\number#1}}
 \AddEnumerateCounter{\nwords}{\@nwords}{seventeen}
+
+%------------------------------
+%  Dice (up to 12)
+%------------------------------
+
+\newcommand*{\dicecount}[1]{%
+  \expandafter\@dicecount\csname c@#1\endcsname%
+}
+\newcommand*{\@dicecount}[1]{%
+  \ifcase#1\or\epsdice{1}\or\epsdice{2}\or\epsdice{3}%
+  \or\epsdice{4}\or\epsdice{5}\or\epsdice{6}%
+  \or\epsdice{3}\epsdice{4}%
+  \or\epsdice{6}\epsdice{2}%
+  \or\epsdice{5}\epsdice{4}%
+  \or\epsdice{5}\epsdice{5}%
+  \or\epsdice{6}\epsdice{5}%
+  \or\epsdice{6}\epsdice{6}%
+  \else\@ctrerr\fi%
+}
+\AddEnumerateCounter{\dicecount}{\@dicecount}{\epsdice{6}\epsdice{6}}
 
 
 %------------------------------
