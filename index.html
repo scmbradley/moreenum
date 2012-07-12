@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Moreenum by scmbradley</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Moreenum</h1>
+        <p>More enumeration types for LaTeX</p>
+
+        <p class="view"><a href="https://github.com/scmbradley/moreenum">View the Project on GitHub <small>scmbradley/moreenum</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/scmbradley/moreenum/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/scmbradley/moreenum/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/scmbradley/moreenum">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>This small LaTeX package provides the following new enumerate styles.</p>
+
+<ul>
+<li>
+<code>\greek</code> for lowercase Greek letters</li>
+<li>
+<code>\Greek</code> for uppercase Greek letters</li>
+<li>
+<code>\enumHex</code> for uppercase hexadecimal enumeration</li>
+<li>
+<code>\enumhex</code> for lowercase hexadecimal enumeration</li>
+<li>
+<code>\enumbinary</code> for binary enumeration</li>
+<li>
+<code>\enumoctal</code> for octal enumeration</li>
+<li>
+<code>\raisenth</code> for 1st, 2nd, 3rd etc with raised "th"s</li>
+<li>
+<code>\levelnth</code> for 1st, 2nd 3rd with level "th"s</li>
+<li>
+<code>\Nthwords</code> for "First", "Second", "Third" etc</li>
+<li>
+<code>\nthwords</code> for "first", "second", "third" etc</li>
+<li>
+<code>\NTHWORDS</code> for "FIRST", "SECOND", "THIRD" etc</li>
+<li>
+<code>\Nwords</code> for "One", "Two", "Three" etc</li>
+<li>
+<code>\nwords</code> for "one", "two", "three" etc</li>
+<li>
+<code>\NWORDS</code> for "ONE", "TWO", "THREE" etc</li>
+<li>
+<code>\dicecount</code> for little pictures of dice</li>
+</ul><p>Each of these works with enumitem's "starred variant" feature.
+So <code>\begin{enumerate}[label=\Hex*]</code> will output a hex enumerated list.
+Enumitem provides a <code>start=0</code> option for starting your enumerations at
+0.
+A <code>binzero</code> environment is provided for binary starting at zero enumeration.
+Likewise <code>enumoctzero</code>, <code>enumHexzero</code> and <code>enumhexzero</code> for the hex enumerations.</p>
+
+<p>Currently requires <code>amsmath</code>, <code>alphalph</code>, <code>enumitem</code> and <code>fmtcount</code> 
+all of which should be part of any modern TeX distribution.</p>
+
+<p>This isn't so much a package designed for use as a list of recipes for
+creating your own new kinds of enumeration.
+All of the work is really done by the various packages loaded.</p>
+
+<p>There is a pdf document that contains a little more information.</p>
+
+<h2>Two Warnings</h2>
+
+<ul>
+<li>You probably don't want to use uppercase greek numbering. Ever.</li>
+<li>Be careful with uppercase Hex numbering for sections if you also
+have appendices. </li>
+<li>(A more general version of the last point) Don't mix <code>\Alph</code> and
+<code>\enumHex</code>, or <code>\alph</code> and <code>\enumhex</code>
+</li>
+</ul><h2>To Do</h2>
+
+<ul>
+<li>Properly namespace the internal macros.</li>
+<li>Make consistent the way the macros for counters and numbers are
+treated.</li>
+<li>Test spacing of enumerations.</li>
+</ul><h2>Changelog</h2>
+
+<h3>v1.02</h3>
+
+<ul>
+<li>Spacing issues fixed</li>
+<li>
+<code>\nwords</code> and friends and <code>\nthwords</code> and friends are now the right way round.</li>
+</ul><h3>v1.01</h3>
+
+<ul>
+<li>
+<code>NWORDS</code> and friends now supported</li>
+</ul><h3>v1.0</h3>
+
+<ul>
+<li>
+<code>levelnth</code> and <code>raisenth</code> work with <code>fmtcount</code>
+</li>
+<li>
+<code>fmtcount</code> also replaces <code>binhex.tex</code>
+</li>
+<li>
+<code>fmtcount</code> also replaces <code>numname</code>
+</li>
+</ul><h3>v0.95</h3>
+
+<ul>
+<li>
+<code>levelnth</code> and <code>raisenth</code> work through environments with <code>engord</code>'s switch</li>
+<li>
+<code>numname</code> used for <code>nwords</code> and <code>nthwords</code>
+</li>
+</ul><h3>v0.9</h3>
+
+<ul>
+<li>Initial version</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/scmbradley">scmbradley</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
